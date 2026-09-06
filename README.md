@@ -1,1 +1,97 @@
-# focusday
+[focusday.html](https://github.com/user-attachments/files/31888498/focusday.html)
+# focusday<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FocusDay — استمر كل يوم</title>
+<style>
+:root{--bg:#070b14;--panel:#0f1728;--panel2:#151f34;--line:#263550;--text:#f8fafc;--muted:#94a3b8;--p:#8066ff;--p2:#a58fff;--g:#38d996;--o:#ffb84d;--r:#ff6670}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--text);font-family:Tahoma,Arial,sans-serif;background:radial-gradient(circle at 85% -10%,#32256d 0,#0b1120 32%,#070b14 68%);min-height:100vh}button,input,textarea{font:inherit}button{cursor:pointer}
+.app{max-width:1240px;margin:auto;padding:20px 16px 55px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:24px}.brand i{width:38px;height:38px;display:grid;place-items:center;border-radius:12px;background:linear-gradient(135deg,var(--p),#bb70ff);font-style:normal}.brand span{color:#a895ff}.user{display:flex;align-items:center;gap:9px}.avatar{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#252f47;color:#fff;font-weight:800}.username{font-size:13px}.muted{color:var(--muted)}
+.tabs{display:flex;gap:7px;overflow:auto;margin-bottom:18px}.tab{background:#0e1626;color:#aeb9cb;border:1px solid var(--line);padding:10px 14px;border-radius:12px;white-space:nowrap}.tab.active{background:var(--p);color:#fff;border-color:var(--p)}
+.page{display:none}.page.active{display:block}.grid{display:grid;grid-template-columns:1.45fr .78fr;gap:16px}.card{background:rgba(15,23,40,.93);border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:0 20px 60px #0004}
+.hero{display:flex;justify-content:space-between;gap:20px;align-items:center}.hero h1{font-size:32px;margin:0 0 8px}.hero p{margin:0;line-height:1.8}.streak{min-width:205px;text-align:center;padding:17px;border-radius:19px;background:linear-gradient(145deg,#241d51,#111a2d);border:1px solid #453980}.streak .fire{font-size:34px}.streak b{display:block;font-size:38px;color:var(--o)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:15px 0}.stat{background:var(--panel2);border-radius:15px;padding:14px}.stat strong{display:block;font-size:21px;margin-bottom:5px}.title{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.title h2{font-size:18px;margin:0}.section{margin-top:15px}.progress{height:9px;background:#202b42;border-radius:30px;overflow:hidden}.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--p),#b99eff);border-radius:30px;transition:.3s}
+.task{display:flex;align-items:center;gap:10px;background:var(--panel2);padding:12px;border-radius:14px;margin:8px 0}.task input{width:18px;height:18px;accent-color:var(--p)}.task.done span{text-decoration:line-through;color:#728198}.task small{margin-right:auto;color:var(--muted)}
+.row{display:flex;gap:8px}.input,.note{width:100%;background:#0b1322;color:#fff;border:1px solid var(--line);border-radius:12px;padding:11px;outline:none}.input:focus,.note:focus{border-color:var(--p)}.btn{border:0;border-radius:11px;padding:10px 14px;background:var(--p);color:#fff;font-weight:800}.btn.secondary{background:#253149}.btn.green{background:#229e69}.btn.red{background:#a83e4b}
+.timer{text-align:center}.modes{display:flex;gap:6px;justify-content:center}.mode{border:0;background:#202b42;color:#bac5d6;border-radius:10px;padding:8px 10px}.mode.active{background:var(--p);color:#fff}.time{font-size:60px;font-weight:900;margin:15px 0}.timerBtns{display:flex;justify-content:center;gap:8px}
+.quote{background:#151f34;border-right:3px solid var(--p);padding:16px;border-radius:13px;line-height:1.9;min-height:100px}.author{color:var(--muted);font-size:12px;margin-top:8px}
+.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.day{height:34px;border-radius:8px;background:#1b263c;color:#8794aa;display:grid;place-items:center;font-size:12px}.day.on{background:#22563f;color:#caffdf}.day.today{outline:2px solid var(--p)}
+.chart{height:180px;display:flex;align-items:end;gap:9px;padding:12px 4px}.bar{flex:1;background:linear-gradient(#ad9bff,#6849ef);border-radius:8px 8px 3px 3px;min-height:7px;position:relative}.bar span{position:absolute;bottom:-22px;width:100%;text-align:center;font-size:11px;color:var(--muted)}
+.habit,.goal{background:var(--panel2);border-radius:14px;padding:13px;margin:8px 0}.habit{display:flex;justify-content:space-between}.habit input{accent-color:var(--g);width:18px;height:18px}.badge{background:#26334d;color:#cad4e3;border-radius:20px;padding:5px 9px;font-size:11px}.level{display:flex;justify-content:space-between;align-items:end}.xp{height:11px;background:#202b42;border-radius:20px;overflow:hidden;margin-top:9px}.xp i{display:block;height:100%;background:linear-gradient(90deg,var(--g),#9af0c3);width:0}
+.friend{display:flex;align-items:center;gap:12px;background:var(--panel2);padding:13px;border-radius:15px;margin:8px 0}.friend .mini{width:38px;height:38px;border-radius:50%;background:#2a3550;display:grid;place-items:center;font-weight:800}.friend .score{margin-right:auto;text-align:left}.rank{font-weight:900;color:var(--o)}
+.challenge{background:linear-gradient(135deg,#201a47,#111a30);border:1px solid #4b3d88}.code{font-size:27px;font-weight:900;letter-spacing:5px;background:#0b1221;border:1px dashed #5d51a0;padding:14px;text-align:center;border-radius:13px;margin:12px 0}
+.modal{position:fixed;inset:0;background:#0009;display:none;place-items:center;padding:15px;z-index:20}.modal.show{display:grid}.modalBox{width:min(460px,100%);background:#111a2c;border:1px solid var(--line);border-radius:22px;padding:22px}.modalBox h2{margin-top:0}.close{float:left;background:transparent;color:#9eabc0;font-size:22px;border:0}.toast{position:fixed;bottom:18px;left:18px;background:#19253a;border:1px solid var(--line);padding:12px 15px;border-radius:12px;display:none;z-index:30}
+@media(max-width:900px){.grid{grid-template-columns:1fr}.hero{flex-direction:column;align-items:stretch}.streak{min-width:0}.stats{grid-template-columns:1fr 1fr}}@media(max-width:520px){.app{padding:15px 10px}.hero h1{font-size:25px}.time{font-size:48px}}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="top"><div class="brand"><i>✓</i>Focus<span>Day</span></div><div class="user"><div class="avatar" id="avatar">؟</div><div class="username" id="username">زائر<br><span class="muted">سجّل دخولك</span></div><button class="btn secondary" onclick="openAuth()">تسجيل / دخول</button></div></div>
+<nav class="tabs"><button class="tab active" onclick="page('today',this)">الرئيسية</button><button class="tab" onclick="page('stats',this)">الإحصائيات</button><button class="tab" onclick="page('habits',this)">العادات</button><button class="tab" onclick="page('goals',this)">الأهداف</button><button class="tab" onclick="page('friends',this)">التحدي مع صديق</button></nav>
+
+<section id="today" class="page active"><div class="grid"><main>
+<div class="card hero"><div><h1>خلّ يومك أفضل من أمس.</h1><p class="muted">ذاكر، أنجز، حافظ على استمراريتك… وخلّ المنافسة مع خويك تزيد الحماس.</p></div><div class="streak"><div class="fire">🔥</div><b id="streak">7</b><span class="muted">يوم متتالي</span></div></div>
+<div class="stats"><div class="stat"><strong id="study">0د</strong><span class="muted">مذاكرة اليوم</span></div><div class="stat"><strong id="done">0</strong><span class="muted">مهام منجزة</span></div><div class="stat"><strong id="sessions">0</strong><span class="muted">جلسات تركيز</span></div><div class="stat"><strong id="xpText">0 XP</strong><span class="muted">نقاط اليوم</span></div></div>
+<div class="card section"><div class="title"><h2>مهام اليوم</h2><span class="muted" id="taskCount">0 / 0</span></div><div class="progress"><i id="taskBar"></i></div><div id="tasks"></div><div class="row" style="margin-top:10px"><input id="taskInput" class="input" placeholder="مثلاً: مذاكرة الفصل الثالث"><button class="btn" onclick="addTask()">إضافة</button></div></div>
+<div class="card section"><div class="title"><h2>ملاحظات اليوم</h2><button class="btn secondary" onclick="saveNote()">حفظ</button></div><textarea id="note" class="note" style="min-height:135px" placeholder="وش أنجزت اليوم؟ وش تبي تحسن بكرة؟"></textarea></div>
+</main><aside>
+<div class="card timer"><h2>مؤقت التركيز</h2><div class="modes"><button class="mode active" onclick="setMode(25,this)">25 د</button><button class="mode" onclick="setMode(50,this)">50 د</button><button class="mode" onclick="setMode(5,this)">5 د</button></div><div class="time" id="time">25:00</div><div class="timerBtns"><button class="btn" id="start" onclick="toggleTimer()">ابدأ</button><button class="btn secondary" onclick="resetTimer()">إعادة</button></div><p class="muted" style="font-size:12px">كل جلسة مكتملة تضيف لك XP.</p></div>
+<div class="card section"><div class="title"><h2>حكمة اليوم</h2><span class="badge">تتغير يوميًا</span></div><div class="quote"><div id="quote"></div><div class="author" id="author"></div></div></div>
+<div class="card section"><div class="title"><h2>استمراريتك</h2><span class="muted">آخر 30 يوم</span></div><div class="calendar" id="calendar"></div></div>
+</aside></div></section>
+
+<section id="stats" class="page"><div class="card"><div class="title"><h2>إحصائياتك</h2><span class="badge">آخر 7 أيام</span></div><div class="stats"><div class="stat"><strong id="weekStudy">0د</strong><span class="muted">مذاكرة</span></div><div class="stat"><strong id="weekTasks">0</strong><span class="muted">مهام</span></div><div class="stat"><strong id="weekSessions">0</strong><span class="muted">جلسات</span></div><div class="stat"><strong id="best">7</strong><span class="muted">أفضل Streak</span></div></div><div class="title" style="margin-top:22px"><h2>المذاكرة اليومية</h2></div><div class="chart" id="chart"></div></div></section>
+
+<section id="habits" class="page"><div class="card"><div class="title"><h2>عاداتي</h2><button class="btn" onclick="addHabit()">+ عادة</button></div><p class="muted">خلها بسيطة وقابلة للاستمرار.</p><div id="habitsList"></div></div></section>
+
+<section id="goals" class="page"><div class="card"><div class="title"><h2>الأهداف والـ XP</h2><button class="btn" onclick="addGoal()">+ هدف</button></div><div class="goal"><div class="level"><div><strong style="font-size:25px">المستوى <span id="level">1</span></strong><div class="muted">تقدمك يتحول إلى XP</div></div><span class="badge" id="next">100 XP</span></div><div class="xp"><i id="xpBar"></i></div></div><div id="goalsList"></div></div></section>
+
+<section id="friends" class="page"><div class="grid"><main>
+<div class="card challenge"><div class="title"><h2>🏆 تحدي الاستمرارية</h2><span class="badge">تنافسوا باحترام</span></div><p class="muted">أنشئ تحديًا وشارك الرمز مع خويك. في النسخة الحالية الرمز يعمل كواجهة مشاركة؛ المزامنة الحقيقية بين جهازين تحتاج قاعدة بيانات.</p><div class="code" id="challengeCode">FD-7K2P</div><div class="row"><button class="btn" onclick="copyCode()">نسخ الرمز</button><button class="btn secondary" onclick="newCode()">رمز جديد</button></div></div>
+<div class="card section"><div class="title"><h2>كيف راح تكون المنافسة؟</h2></div><div class="friend"><div class="mini">أ</div><div><strong id="meName">أنت</strong><div class="muted">Streak: 7 أيام</div></div><div class="score"><div class="rank">#1</div><small class="muted">الأكثر استمرارية</small></div></div><div class="friend"><div class="mini">خ</div><div><strong>خويك</strong><div class="muted">بانتظار الانضمام</div></div><div class="score">—</div></div></div>
+</main><aside><div class="card"><h2>انضم لتحدي</h2><p class="muted">أدخل الرمز الذي أرسله لك خويك.</p><div class="row"><input id="joinCode" class="input" placeholder="FD-XXXX"><button class="btn green" onclick="joinChallenge()">انضمام</button></div></div></aside></div></section>
+</div>
+
+<div class="modal" id="auth"><div class="modalBox"><button class="close" onclick="closeAuth()">×</button><h2 id="authTitle">إنشاء حساب</h2><p class="muted">حسابك الحقيقي سيحتاج قاعدة بيانات عند نشر النسخة النهائية.</p><input id="name" class="input" placeholder="اسمك" style="margin:6px 0"><input id="email" class="input" placeholder="البريد الإلكتروني" style="margin:6px 0"><input id="pass" type="password" class="input" placeholder="كلمة المرور" style="margin:6px 0"><button class="btn" style="width:100%;margin-top:8px" onclick="localLogin()">متابعة</button><p class="muted" style="font-size:12px;margin-bottom:0">هذه نسخة تجريبية محلية: لا تضع كلمة مرور حقيقية هنا.</p></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const K='focusday_final';let d=JSON.parse(localStorage.getItem(K)||'null')||{name:'',streak:7,xp:0,study:0,sessions:0,note:'',tasks:[{t:'مراجعة الرياضيات',done:false,d:'45 دقيقة'},{t:'حل واجب الإنجليزي',done:false,d:'30 دقيقة'}],habits:[{t:'المذاكرة اليوم',done:false},{t:'مراجعة أهداف الغد',done:false}],goals:[{t:'مذاكرة 20 ساعة هذا الشهر',p:0,target:1200,unit:'دقيقة'}],history:{},code:'FD-7K2P'};
+const qs=x=>document.getElementById(x);function save(){localStorage.setItem(K,JSON.stringify(d))}
+function page(id,b){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));qs(id).classList.add('active');document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');if(id==='stats')stats()}
+function toast(t){let x=qs('toast');x.textContent=t;x.style.display='block';setTimeout(()=>x.style.display='none',1800)}
+function esc(s){return s.replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function fmt(m){return m<60?m+'د':Math.floor(m/60)+'س '+(m%60?m%60+'د':'')}
+function render(){
+let now=new Date();qs('date')?.textContent;qs('streak').textContent=d.streak;qs('study').textContent=fmt(d.study);qs('done').textContent=d.tasks.filter(x=>x.done).length;qs('sessions').textContent=d.sessions;qs('xpText').textContent=d.xp+' XP';qs('note').value=d.note;
+if(d.name){qs('username').innerHTML=esc(d.name)+'<br><span class="muted">حساب تجريبي</span>';qs('avatar').textContent=d.name.trim()[0]||'؟';qs('meName').textContent=d.name}
+let b=qs('tasks');b.innerHTML='';d.tasks.forEach((x,i)=>b.innerHTML+=`<label class="task ${x.done?'done':''}"><input type="checkbox" ${x.done?'checked':''} onchange="task(${i})"><span>${esc(x.t)}</span><small>${esc(x.d)}</small></label>`);let done=d.tasks.filter(x=>x.done).length;qs('taskCount').textContent=done+' / '+d.tasks.length;qs('taskBar').style.width=(d.tasks.length?done/d.tasks.length*100:0)+'%';
+qs('challengeCode').textContent=d.code;calendar();habits();goals();quote();stats();save()
+}
+function task(i){d.tasks[i].done=!d.tasks[i].done;if(d.tasks[i].done){d.xp+=10;toast('+10 XP')}render()}
+function addTask(){let v=qs('taskInput').value.trim();if(!v)return;d.tasks.push({t:v,d:'مهمة جديدة',done:false});qs('taskInput').value='';render()}
+function saveNote(){d.note=qs('note').value;save();toast('تم حفظ الملاحظات ✓')}
+let sec=1500,running=false,timer=null,mode=25;function time(){qs('time').textContent=String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0')}
+function toggleTimer(){running=!running;qs('start').textContent=running?'إيقاف':'ابدأ';if(running)timer=setInterval(()=>{if(sec>0){sec--;time()}else{clearInterval(timer);running=false;d.sessions++;d.study+=mode;let k=new Date().toISOString().slice(0,10);d.history[k]=(d.history[k]||0)+mode;d.xp+=25;qs('start').textContent='ابدأ';toast('انتهت الجلسة 🎉 +25 XP');render()}},1000);else clearInterval(timer)}
+function resetTimer(){clearInterval(timer);running=false;sec=mode*60;qs('start').textContent='ابدأ';time()}
+function setMode(m,b){mode=m;resetTimer();document.querySelectorAll('.mode').forEach(x=>x.classList.remove('active'));b.classList.add('active')}
+const quotes=[['الاستمرار بخطوة صغيرة كل يوم يصنع فرقًا كبيرًا.','حكمة FocusDay'],['ليس المطلوب أن تكون مثاليًا؛ المطلوب ألا تتوقف.','حكمة FocusDay'],['من ثبت على القليل، بلغ الكثير.','حكمة عربية'],['العبرة ليست بسرعة البداية، بل بثبات المسير.','حكمة FocusDay'],['كل يوم تستمر فيه هو دليل جديد أنك قادر على التغيير.','حكمة FocusDay'],['إذا تعثرت، عد إلى الطريق بهدوء وواصل.','حكمة FocusDay'],['ابدأ بما تستطيع، ثم كرر ذلك حتى يصبح عادة.','حكمة FocusDay'],['لا تحتقر خطوة صغيرة، فالتراكم يصنع الإنجاز.','حكمة FocusDay']];
+function quote(){let base=new Date(2026,0,1),n=Math.floor((new Date(new Date().setHours(0,0,0,0))-base)/86400000),q=quotes[((n%quotes.length)+quotes.length)%quotes.length];qs('quote').textContent=q[0];qs('author').textContent='— '+q[1]}
+function calendar(){let c=qs('calendar');c.innerHTML='';for(let i=29;i>=0;i--){let x=new Date();x.setDate(x.getDate()-i);let k=x.toISOString().slice(0,10),e=document.createElement('div');e.className='day '+(d.history[k]?'on ':'')+(i===0?'today':'');e.textContent=x.getDate();c.appendChild(e)}}
+function habits(){qs('habitsList').innerHTML=d.habits.map((h,i)=>`<div class="habit"><span>${esc(h.t)}</span><label><input type="checkbox" ${h.done?'checked':''} onchange="habit(${i})"> تم اليوم</label></div>`).join('')}
+function habit(i){d.habits[i].done=!d.habits[i].done;if(d.habits[i].done)d.xp+=5;render()}
+function addHabit(){let v=prompt('اسم العادة:');if(v?.trim()){d.habits.push({t:v.trim(),done:false});render()}}
+function goals(){qs('goalsList').innerHTML=d.goals.map((g,i)=>{let p=Math.min(100,Math.round(g.p/g.target*100));return `<div class="goal"><div class="title"><strong>${esc(g.t)}</strong><span class="muted">${g.p}/${g.target} ${g.unit}</span></div><div class="progress"><i style="width:${p}%"></i></div><button class="btn secondary" style="margin-top:9px" onclick="goal(${i})">+ تقدم</button></div>`}).join('');let lv=Math.floor(d.xp/100)+1,inside=d.xp%100;qs('level').textContent=lv;qs('next').textContent=(100-inside)+' XP للمستوى التالي';qs('xpBar').style.width=inside+'%'}
+function goal(i){let n=parseInt(prompt('كم تضيف؟','30'));if(!isNaN(n)){d.goals[i].p=Math.min(d.goals[i].target,d.goals[i].p+n);d.xp+=5;render();toast('+5 XP')}}
+function addGoal(){let t=prompt('اسم الهدف:');let n=parseInt(prompt('الهدف الرقمي:','100'));if(t&&n>0){d.goals.push({t,p:0,target:n,unit:'وحدة'});render()}}
+function stats(){let a=[];for(let i=6;i>=0;i--){let x=new Date();x.setDate(x.getDate()-i);let k=x.toISOString().slice(0,10);a.push({v:d.history[k]||0,l:x.toLocaleDateString('ar-SA',{weekday:'short'})})}qs('weekStudy').textContent=fmt(a.reduce((s,x)=>s+x.v,0));qs('weekSessions').textContent=d.sessions;qs('weekTasks').textContent=d.tasks.filter(x=>x.done).length;qs('best').textContent=Math.max(7,d.streak);let max=Math.max(60,...a.map(x=>x.v)),c=qs('chart');c.innerHTML='';a.forEach(x=>{let e=document.createElement('div');e.className='bar';e.style.height=Math.max(7,x.v/max*145)+'px';e.innerHTML='<span>'+x.l+'</span>';c.appendChild(e)})}
+function openAuth(){qs('auth').classList.add('show')}function closeAuth(){qs('auth').classList.remove('show')}
+function localLogin(){let n=qs('name').value.trim();if(!n){toast('اكتب اسمك أولاً');return}d.name=n;save();closeAuth();render();toast('أهلًا '+n+' 👋')}
+function newCode(){d.code='FD-'+Math.random().toString(36).slice(2,6).toUpperCase();render();toast('تم إنشاء رمز جديد')}
+function copyCode(){navigator.clipboard?.writeText(d.code);toast('تم نسخ الرمز')}
+function joinChallenge(){let v=qs('joinCode').value.trim().toUpperCase();if(v.length>=4){toast('تم قبول الرمز تجريبيًا — سنربطه بقاعدة البيانات في النسخة النهائية')}} 
+render();time();
+</script>
+</body>
+</html>
